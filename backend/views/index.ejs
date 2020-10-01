@@ -14,20 +14,16 @@
         <p>ToDo List</p>
         <button class="clear">CLEAR</button>
       </div>
-        <ul id="list">
+      <ul id="list">
+        <script src="./app.js"> </script>
+          <form action="/newtask" method="post">
+            <div class="add-task">  
+              <i type="submit" id="addButton"></i> 
+              <input type="text" name="task" id="input" placeholder="Add Task">
+            </div>
+          </form>
+        
         </ul>
-        <form action="/newtask" method="post">
-        <div class="add-task">  
-          <i type="submit" id="addButton"></i>
-          <input type="text" name="task" id="input" placeholder="Add Task">
-        </div>
-      </form>
-      
       </div>
-    </div>
-    <script src="./app.js"></script>
-    {{#newtask}}
-        {{task}}
-      {{/newtask}}
   </body>
 </html>

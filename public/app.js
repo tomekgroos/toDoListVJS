@@ -16,27 +16,6 @@ const SHADOWED_TRASH = "shadowTrash";
 let LIST = [];
 let id = 0;
 
-// function which add tasks
-
-function addTodo(toDo, id, done, trash){
-
-    if(trash){
-        return;
-    }
-
-    const DONE = done ? CHECK : UNCHECK;
-    const LINE = done ? LINE_THROUGH : "";
-    const SHADOW = done ? SHADOWED_TRASH : "";
-
-    const text = `<li class="task">
-                    <i class ="${DONE}" job="complete" id="${id}"></i>
-                    <p class="text ${LINE}">${toDo}</p>
-                    <i class="trash ${SHADOW}" job="delete" id="${id}" name="delete"></i>
-                </li>`
-    const position = "beforeend";
-    list.insertAdjacentHTML(position, text);
-
-}
 
 // restore list array
 
@@ -65,7 +44,27 @@ clear.addEventListener('click',() =>{
     location.reload();
 })
 
+// function which add tasks
 
+function addTodo(toDo, id, done, trash){
+
+    if(trash){
+        return;
+    }
+
+    const DONE = done ? CHECK : UNCHECK;
+    const LINE = done ? LINE_THROUGH : "";
+    const SHADOW = done ? SHADOWED_TRASH : "";
+
+    const text = `<li class="task">
+                    <i class ="${DONE}" job="complete" id="${id}"></i>
+                    <p class="text ${LINE}">${toDo}</p>
+                    <i class="trash ${SHADOW}" job="delete" id="${id}" name="delete"></i>
+                </li>`
+    const position = "beforeend";
+    list.insertAdjacentHTML(position, text);
+
+}
 
 // function which handles user input by enter
 
