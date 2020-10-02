@@ -3,18 +3,9 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const mustacheExpress = require('mustache-express');
+const routes = require('./routes/routes');
 
-// creating a mongoose Schema
-
-const Schema = mongoose.Schema;
-
-let toDoListSchema = new Schema({
-        name: String,
-        done: Boolean
-    }, 
-);
-
-let toDoItem = mongoose.model('toDoItem', toDoListSchema);
 
 // connecting to mongo
 require('dotenv').config();
@@ -27,52 +18,23 @@ connection.once('open', () => {
   console.log("Connected to MongoDB");
 })
 
+// include body parser and remain files
+
 app.use(express.static(path.join('C:/Programowanie/todoVJSApp', "public")));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.set("view engine", "ejs");
+// include mustache templates
+const mustacheExpressInstance = mustacheExpress();
+mustacheExpressInstance.cache - null;
+app.engine('mustache', mustacheExpressInstance);
+app.set('view engine', 'mustache');
+app.set('views','C:/Programowanie/todoVJSApp/backend' + '/views');
 
 app.listen(PORT, () =>{
     console.log('listening on port 4000');
 });
 
-// rendering html with javascript from converted index.html to index.ejs file (embedded javaScript)
-
-app.get('/', (req, res) =>{
-        toDoItem.find({}).then(function(results){
-            res.render('index', {newTask: results});
-        })
-        
-    }); 
-    
-
-// create task, sending to server 
-
-app.post("/newtask", function(req, res) {
-    
-    let newTask = new toDoItem({
-        name: req.body.task,
-        done: false
-    });
-    
-    newTask.save().then(function(result){
-        console.log(`Task added: ${result}`);
-        
-    });
-    
-    res.redirect("/")
-
-});
-
-app.delete("/id:", (req, res) => {
-    toDoItem.findByIdAndRemove(req.body.delete, (error) =>{
-        if (error){
-            console.log(error);
-        } else {
-            console.log('Task deleted')
-        }
-    });
-});
+app.use('/', routes);
 
 
