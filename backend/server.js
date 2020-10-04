@@ -31,6 +31,8 @@ app.engine('mustache', mustacheExpressInstance);
 app.set('view engine', 'mustache');
 app.set('views','C:/Programowanie/todoVJSApp/backend' + '/views');
 
+// confirmation of port connected
+
 app.listen(PORT, () =>{
     console.log('listening on port 4000');
 });

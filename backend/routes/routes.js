@@ -1,12 +1,7 @@
 const router = require("express").Router();
 const toDoItem = require('../models/taskmodel');
 
-/* ---rendering html with javascript from converted index.html to index.mustache file---
-
-    mustache.js is an implementation of templates in JavaScript which don't require 
-    any dependencies - "logic-less" means there is no if statements, else clauses
-    and for loops instead of only tags. More info under: https://www.npmjs.com/package/mustache
-*/
+// get list of tasks
 
 router.get("/", (req, res) => {
   toDoItem.find({}).then(function (results) {
@@ -18,7 +13,10 @@ router.get("/", (req, res) => {
       return task.done;
     });
     res.render("index", { newtask: tasks, doneTasks: doneTasks });
-  });
+  }).catch(function(error){
+      console.log(error);
+      res.redirect("/");
+    });
   
 });
 
@@ -34,12 +32,14 @@ router.post("/newtask", function(req, res) {
     newtask.save().then(function(result){
         console.log(`Task added: ${result}`);
         res.redirect("/")
-    }).catch(function(err){
-      console.log(err);
+    }).catch(function(error){
+      console.log(error);
       res.redirect("/");
     });
 
 });
+
+  // change status done: true || false
 
     router.post("/newtask/:id/completed", function(req, res) {
           let taskId = req.params.id;
@@ -51,9 +51,14 @@ router.post("/newtask", function(req, res) {
             return result.save();
           }).then(function(result) {
             res.redirect("/");
-          });
+          }).catch(function(error){
+            console.log(error);
+            res.redirect("/")
+          })
           
     });
+
+    // delete task
 
      router.post("/newtask/:id/deleted", function(req, res) {
           let taskId = req.params.id;
@@ -64,7 +69,10 @@ router.post("/newtask", function(req, res) {
             return result.delete();
           }).then(function(result){
             res.redirect("/");
-          })
+          }).catch(function(error){
+            console.log(error);
+            res.redirect("/")
+          });
        
           
     });

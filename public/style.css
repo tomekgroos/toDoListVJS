@@ -25,19 +25,6 @@ body{
     padding-left: 14px;
 }
 
-.header button{
-    cursor:pointer;
-    font-size: 14px;
-    background-color: #EE2A00;
-    font-weight: bold;
-    color: white;
-    transition: background-color 750ms linear;
-}
-
-.header button:hover{
-    background-color: rgba(97, 0, 0, 0.856);
-}
-
 #list{
     width: 100%;
     margin: 0;
@@ -72,6 +59,7 @@ body{
     margin-top: 15px;
     margin-left: 10px;
     cursor:pointer;
+    border:none;
 }
 
 .li-formforcheck{
@@ -89,8 +77,6 @@ body{
     width: 10%;  
 }
 
-
-
 .checkboxToDo{
     display:inline-flex;
     position:relative;
@@ -101,9 +87,8 @@ body{
     margin-top: 15px;
     margin-left: 10px;
     cursor:pointer;
+    border:none;
 }
-
-
 
 .trash{
     width: 17px;
@@ -135,8 +120,7 @@ body{
     justify-content:space-between;
     cursor:pointer;
     background: beige;
-    border-bottom: 2px solid #e6ebed;
-    
+    border-bottom: 2px solid #e6ebed; 
 }
 
 .add-task input{
@@ -163,15 +147,7 @@ body{
     background-image: url('./addButton.png');
     background-size: 100%;
     margin-top: 10px;
-    
+    border:none;
+    cursor: pointer;
 }
 
-
-
-/*
-#9eb2c0 - task done
-#2e3641 - task toDo
-#e6ebed - border bottom task
-*/
-
-      
