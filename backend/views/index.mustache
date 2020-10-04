@@ -13,21 +13,42 @@
     <div class="container">
       <div class="header">
         <p>ToDo List</p>
-        <button class="clear">CLEAR</button>
       </div>
-      <ul id="list"></ul>
       <form action="/newtask" method="post">
         <div class="add-task">
           <i type="submit" id="addButton"></i>
           <input type="text" name="task" id="input" placeholder="Add Task" />
         </div>
       </form>
+       <ul id="list">
+     
+       {{#newtask}}
+      <li class="task"> 
+      <form class="li-formforcheck" action="/newtask/{{_id}}/completed" method="post">
+      <button class ="checkboxToDo" type="submit"></button>
+      <p>{{name}}</p>
+      </form>
+      <form class="li-formfortrash" action="/newtask/{{_id}}/deleted" method="post">
+      <button class="trash" type="submit"></button>
+      </form>
+      </li>
+       {{/newtask}}
+      </ul>
+      
+       <ul id="list">
+       {{#doneTasks}}
+      <li class="task"> 
+      <form class="li-formforcheck" action="/newtask/{{_id}}/completed" method="post">
+      <button class ="checkboxDone" type="submit"></button>
+      <p class="task-done">{{name}} </p>
+      </form>
+      <form class="li-formfortrash" action="/newtask/{{_id}}/deleted" method="post">
+      <button class="shadowTrash" type="submit"></button>
+      </form>
+      </li>
+       {{/doneTasks}}
+      </ul>
+
     </div>
-    <ul>
-    {{#newtask}}
-      <li>{{task}} - {{done}}</li>
-    {{/newtask}}
-    </ul> 
-    <script src="./app.js"></script> 
   </body>
 </html>

@@ -74,7 +74,26 @@ body{
     cursor:pointer;
 }
 
+.li-formforcheck{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.li-formforcheck p{
+    margin-left: 80px;
+}
+
+.li-formfortrash{
+    width: 10%;  
+}
+
+
+
 .checkboxToDo{
+    display:inline-flex;
+    position:relative;
     width: 17px;
     height: 17px;
     background-image: url('./emptyCheckbox.png');
@@ -84,11 +103,14 @@ body{
     cursor:pointer;
 }
 
+
+
 .trash{
     width: 17px;
     height: 17px;
     background-image: url('/trash.png');
     background-size: 100%;
+    border:none;
     margin-top: 15px;
     margin-right: 10px;
     cursor:pointer;
@@ -98,6 +120,10 @@ body{
     width: 17px;
     height: 17px;
     background-image: url('./shadowTrash.png');
+    background-size: 100%;
+    border:none;
+    margin-top: 15px;
+    margin-right: 10px;
     cursor:pointer;
 }
 

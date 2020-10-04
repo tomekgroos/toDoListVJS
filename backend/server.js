@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 // include mustache templates
 const mustacheExpressInstance = mustacheExpress();
-mustacheExpressInstance.cache - null;
+mustacheExpressInstance.cache = null;
 app.engine('mustache', mustacheExpressInstance);
 app.set('view engine', 'mustache');
 app.set('views','C:/Programowanie/todoVJSApp/backend' + '/views');

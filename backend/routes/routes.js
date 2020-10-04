@@ -10,26 +10,64 @@ const toDoItem = require('../models/taskmodel');
 
 router.get("/", (req, res) => {
   toDoItem.find({}).then(function (results) {
-    res.render("index", { newtask: results });
+    let tasks = results.filter(function (task) {
+      return !task.done;
+    });
+
+    let doneTasks = results.filter(function (task) {
+      return task.done;
+    });
+    res.render("index", { newtask: tasks, doneTasks: doneTasks });
   });
+  
 });
 
 // create task, sending to server 
 
 router.post("/newtask", function(req, res) {
     
-    let newTask = new toDoItem({
+    let newtask = new toDoItem({
         name: req.body.task,
         done: false
     });
-    
-    newTask.save().then(function(result){
+  
+    newtask.save().then(function(result){
         console.log(`Task added: ${result}`);
-        
+        res.redirect("/")
+    }).catch(function(err){
+      console.log(err);
+      res.redirect("/");
     });
-    
-    res.redirect("/")
 
 });
+
+    router.post("/newtask/:id/completed", function(req, res) {
+          let taskId = req.params.id;
+
+          toDoItem.findById(taskId)
+          .exec()
+          .then(function(result) {
+            result.done = !result.done;
+            return result.save();
+          }).then(function(result) {
+            res.redirect("/");
+          });
+          
+    });
+
+     router.post("/newtask/:id/deleted", function(req, res) {
+          let taskId = req.params.id;
+
+          toDoItem.findByIdAndRemove(taskId)
+          .exec()
+          .then(function(result){
+            return result.delete();
+          }).then(function(result){
+            res.redirect("/");
+          })
+       
+          
+    });
+
 
 module.exports = router;

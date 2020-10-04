@@ -4,8 +4,14 @@ const Schema = mongoose.Schema;
 // creating a mongoose Schema
 
 let toDoListSchema = new Schema({
-        name: String,
-        done: Boolean
+        name: {
+            type: String,
+            required: true
+            },
+        done: {
+            type: Boolean,
+            default: false
+        }
     }, 
 );
 
